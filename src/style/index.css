@@ -1,0 +1,119 @@
+/* src/style/index.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #82226b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  width: 1200px;
+  height: 600px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 60px;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Left */
+.login-left {
+  width: 50%;
+  background-color: #2fbfa7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+}
+
+.logo-img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+/* Right */
+.login-right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #2fbfa7;
+  box-shadow: 0 0 0 2px rgba(47, 191, 167, 0.3);
+}
+
+.toggle-password {
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-button {
+  margin-top: 20px;
+}
+
+.form-button button {
+  width: 100%;
+  background-color: #2fbfa7;
+  color: #000000;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-button button:hover {
+  background-color: #29a48f;
+}
