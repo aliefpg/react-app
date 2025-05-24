@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate} from "react-router-dom";
 import AdminSidebar from "../components/AdminSidebar";
 
 // Placeholder component
@@ -9,7 +9,6 @@ import SiswaPage from "./admin/manajemen/siswaPage";
 
 const AdminPage = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const location = useLocation();
 
   if (!isLoggedIn) return <Navigate to="/login" replace />;
 

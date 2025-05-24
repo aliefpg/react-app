@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -13,10 +12,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Simulasi validasi (bisa kamu ganti ke backend nanti)
     if (email === "admin@example.com" && password === "admin") {
-      localStorage.setItem("isLoggedIn", "true"); // Simpan status login
-      navigate("/admin/dashboard"); // Arahkan ke halaman dashboard
+      localStorage.setItem("isLoggedIn", "true");
+      navigate("/admin/dashboard");
     } else {
       alert("Email atau password salah");
     }

@@ -1,7 +1,6 @@
-// src/components/AdminSidebar.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../style/admin.css";
+import "../style/layout.css";
 
 const AdminSidebar = () => {
   const [showManajemenSubmenu, setShowManajemenSubmenu] = useState(false);

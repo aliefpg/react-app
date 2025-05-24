@@ -1,0 +1,139 @@
+.siswa-container {
+  background-color: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-top: 20px;
+}
+
+.siswa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.siswa-header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.siswa-header h1 span {
+  font-weight: 300;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-tambah {
+  background-color: #000;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-print {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.filter-grid select,
+.filter-grid input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.filter-grid label {
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.btn-cari {
+  background-color: #555;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 22px;
+}
+
+.search-box {
+  margin-bottom: 24px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.empty-message {
+  text-align: center;
+  color: #555;
+  font-weight: 500;
+  padding: 40px 0;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.siswa-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.siswa-table th,
+.siswa-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.siswa-table th {
+  background-color: #2fbfa7;
+  color: white;
+}
+
+.siswa-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-delete:hover {
+  background-color: #c0392b;
+}
