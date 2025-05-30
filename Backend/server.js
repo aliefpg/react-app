@@ -22,8 +22,20 @@ db.connect(err => {
 // GET siswa
 app.get("/api/siswa", (req, res) => {
   db.query(`
-    SELECT id, nama, tempat_lahir, tanggal_lahir, hobi, no_hp, jenis_kelamin, no_hp_ortu, alamat
+    SELECT id, nama, tempat_lahir, tanggal_lahir, hobi, no_hp, jenis_kelamin, no_hp_ortu, alamat, program_studi
     FROM data_siswa ORDER BY id DESC
+  `, (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json(result);
+  });
+});
+
+
+app.get("/api/program-studi", (req, res) => {
+  db.query(`
+    SELECT nisn, program_studi
+    FROM data_sekolah
+    ORDER BY nisn ASC
   `, (err, result) => {
     if (err) return res.status(500).send(err);
     res.json(result);
@@ -45,8 +57,8 @@ app.post("/api/siswa", (req, res) => {
   const data = req.body;
   const sql = `
     INSERT INTO data_siswa
-    (nama, tempat_lahir, tanggal_lahir, hobi, no_hp, jenis_kelamin, no_hp_ortu, alamat)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    (nama, tempat_lahir, tanggal_lahir, hobi, no_hp, jenis_kelamin, no_hp_ortu, alamat, program_studi)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   db.query(sql, [
@@ -58,9 +70,50 @@ app.post("/api/siswa", (req, res) => {
     data.jenis_kelamin,
     data.no_hp_ortu,
     data.alamat,
+    data.program_studi
   ], (err, result) => {
     if (err) return res.status(500).send(err);
     res.send({ message: "Siswa berhasil ditambahkan", id: result.insertId });
+  });
+});
+
+// GET sekolah
+app.get("/api/sekolah", (req, res) => {
+  db.query(`
+    SELECT id, nis, nisn, program_studi, unit, kelas, status
+    FROM data_sekolah ORDER BY id DESC
+  `, (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json(result);
+  });
+});
+
+// POST sekolah
+app.post("/api/sekolah", (req, res) => {
+  const data = req.body;
+  const sql = `
+    INSERT INTO data_sekolah
+    (nis, nisn, program_studi, unit, kelas, status)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `;
+  db.query(sql, [
+    data.nis,
+    data.nisn,
+    data.program_studi,
+    data.unit,
+    data.kelas,
+    data.status,
+  ], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.send({ message: "Sekolah berhasil ditambahkan", id: result.insertId });
+  });
+});
+
+// DELETE sekolah
+app.delete("/api/sekolah/:id", (req, res) => {
+  db.query("DELETE FROM data_sekolah WHERE id = ?", [req.params.id], (err) => {
+    if (err) return res.status(500).send(err);
+    res.send({ message: "Sekolah berhasil dihapus" });
   });
 });
 

@@ -24,6 +24,7 @@ onClick={() => setShowManajemenSubmenu(!showManajemenSubmenu)}
               <li><Link to="/admin/manajemen/kelas">Kelas</Link></li>
               <li><Link to="/admin/manajemen/program-studi">Program Studi</Link></li>
               <li><Link to="/admin/manajemen/siswa">Siswa</Link></li>
+              <li><Link to="/admin/manajemen/sekolah">Sekolah</Link></li>
             </ul>
           )}
         </li>

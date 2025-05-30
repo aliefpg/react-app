@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (email === "admin@example.com" && password === "admin") {
+    if (email === "alief@gmail.com" && password === "admin") {
       localStorage.setItem("isLoggedIn", "true");
       navigate("/admin/dashboard");
     } else {

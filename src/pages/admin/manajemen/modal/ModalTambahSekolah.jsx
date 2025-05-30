@@ -1,44 +1,47 @@
 import React, { useState } from "react";
 import "../../../../style/modal.css";
 
-const ModalTambahSiswa = ({ onClose }) => {
-  const [activeTab, setActiveTab] = useState("siswa");
+const ModalTambahSekolah = ({ onClose }) => {
+  const [activeTab, setActiveTab] = useState("sekolah");
 
   // Data umum siswa
   const [formData, setFormData] = useState({
-    nama: "",
-    tempat_lahir: "",
-    tanggal_lahir: "",
-    hobi: "",
-    no_hp: "",
-    jenis_kelamin: "",
-    no_hp_ortu: "",
-    alamat: "",
+    nis: "",
+    nisn: "",
     program_studi: "",
+    unit: "",
+    kelas: "",
+    status: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if ((name === "no_hp" || name === "no_hp_ortu") && !/^\d*$/.test(value)) return;
+    if ((name === "nis" || name === "nisn") && !/^\d*$/.test(value)) return;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+      const isComplete = Object.values(formData).every((val) => typeof val === "number" ? val !== null && val !== "" : val.trim() !== "");
+        if (!isComplete) {
+          alert("Semua field wajib diisi!");
+          return;
+        }
+
     try {
-      const res = await fetch("http://localhost:3001/api/siswa", {
+      const res = await fetch("http://localhost:3001/api/sekolah", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const result = await res.json();
-      alert(result.message || "Data siswa berhasil ditambahkan!");
+      alert(result.message || "Data sekolah berhasil ditambahkan!");
       onClose();
     } catch (err) {
       console.error(err);
-      alert("Gagal menyimpan data siswa.");
+      alert("Gagal menyimpan data sekolah.");
     }
   };
 
@@ -46,46 +49,10 @@ const ModalTambahSiswa = ({ onClose }) => {
     <div className="modal-overlay">
       <div className="modal-box">
         <div className="form-tabs">
-          <button className={activeTab === "siswa" ? "active" : ""} onClick={() => setActiveTab("siswa")}>Data Siswa</button>
           <button className={activeTab === "sekolah" ? "active" : ""} onClick={() => setActiveTab("sekolah")}>Data Sekolah</button>
         </div>
 
         <form className="form-content" onSubmit={handleSubmit}>
-          {activeTab === "siswa" && (
-            <>
-              <label>Nama Siswa</label>
-              <input name="nama" type="text" value={formData.nama} onChange={handleChange} placeholder="Masukkan Nama Siswa" />
-
-              <label>Tempat Lahir</label>
-              <input name="tempat_lahir" type="text" value={formData.tempat_lahir} onChange={handleChange} placeholder="Masukkan Tempat Lahir" />
-
-              <label>Tanggal Lahir</label>
-              <input name="tanggal_lahir" type="date" value={formData.tanggal_lahir} onChange={handleChange} />
-
-              <label>Hobi</label>
-              <input name="hobi" type="text" value={formData.hobi} onChange={handleChange} placeholder="Masukkan Hobi" />
-
-              <label>Nomor Handphone</label>
-              <input name="no_hp" type="text" value={formData.no_hp} onChange={handleChange} placeholder="Masukkan Nomor HP" inputMode="numeric" />
-
-              <label>Jenis Kelamin</label>
-              <select name="jenis_kelamin" value={formData.jenis_kelamin} onChange={handleChange}>
-                <option value="">Belum Dipilih</option>
-                <option>Laki-laki</option>
-                <option>Perempuan</option>
-              </select>
-
-              <label>Nomor Handphone Orang Tua</label>
-              <input name="no_hp_ortu" type="text" value={formData.no_hp_ortu} onChange={handleChange} placeholder="Masukkan Nomor HP Ortu" inputMode="numeric" />
-
-              <label>Program Studi</label>
-              <input  name="program_studi"  type="text"  value={formData.program_studi}  onChange={handleChange} placeholder="Masukkan Program Studi" /> 
-
-              <label>Alamat</label>
-              <textarea name="alamat" rows="3" value={formData.alamat} onChange={handleChange} placeholder="Masukkan Alamat" />
-            </>
-          )}
-
           {activeTab === "sekolah" && (
             <>
               <label>NIS</label>
@@ -139,4 +106,4 @@ const ModalTambahSiswa = ({ onClose }) => {
   );
 };
 
-export default ModalTambahSiswa;
+export default ModalTambahSekolah;

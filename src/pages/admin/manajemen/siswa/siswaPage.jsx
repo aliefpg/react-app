@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "../../../style/siswa.css";
-import ModalTambahSiswa from "./modal/ModalTambahSiswa";
+import "@/style/siswa.css";
+import ModalTambahSiswa from "../modal/ModalTambahSiswa";
 
 const SiswaPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [siswaList, setSiswaList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-
+  
   useEffect(() => {
     fetchDataSiswa();
   }, []);
@@ -91,6 +90,7 @@ const handleDelete = async (id) => {
                 <th>Jenis Kelamin</th>
                 <th>No HP Ortu</th>
                 <th>Alamat</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>

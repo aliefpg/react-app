@@ -5,7 +5,9 @@ import AdminSidebar from "../components/AdminSidebar";
 // Placeholder component
 const EmptyPage = ({ title }) => <h1>{title}</h1>;
 import KelasPage from "./admin/manajemen/kelasPage";
-import SiswaPage from "./admin/manajemen/siswaPage";
+import SiswaPage from "./admin/manajemen/siswa/siswaPage";
+import ProgramStudiPage from "./admin/manajemen/programstudi/ProgramStudiPage";
+import SekolahPage from "./admin/manajemen/sekolah/sekolahPage";
 
 const AdminPage = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -30,6 +32,8 @@ const AdminPage = () => {
           <Route path="pengaturan" element={<EmptyPage title="Pengaturan" />} />
           <Route path="manajemen/kelas" element={<KelasPage />} />
           <Route path ="manajemen/siswa" element={<SiswaPage />} />
+          <Route path="manajemen/program-studi" element={<ProgramStudiPage />} />
+          <Route path="manajemen/sekolah" element={<SekolahPage />} />
         </Routes>
       </div>
     </div>
