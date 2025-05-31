@@ -6,14 +6,18 @@ const SiswaPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [siswaList, setSiswaList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  
+  const [filter, setFilter] = useState({
+    jenis_kelamin: "",
+  });
+
   useEffect(() => {
     fetchDataSiswa();
   }, []);
 
   const fetchDataSiswa = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/siswa");
+      const API = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${API}/api/siswa`);
       if (!res.ok) throw new Error("Gagal fetch data siswa");
       const data = await res.json();
       setSiswaList(data);
@@ -27,21 +31,37 @@ const SiswaPage = () => {
     fetchDataSiswa();
   };
 
-const handleDelete = async (id) => {
-  const confirmDelete = window.confirm("Yakin ingin menghapus data ini?");
-  if (!confirmDelete) return;
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Yakin ingin menghapus data ini?");
+    if (!confirmDelete) return;
 
-  try {
-    const res = await fetch(`http://localhost:3001/api/siswa/${id}`, {
-      method: "DELETE",
-    });
-    const data = await res.json();
-    alert(data.message || "Data berhasil dihapus");
-    fetchDataSiswa();
-  } catch (err) {
-    console.error("Gagal menghapus data:", err);
-  }
-};
+    try {
+      const API = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${API}/api/siswa/${id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      alert(data.message || "Data berhasil dihapus");
+      fetchDataSiswa();
+    } catch (err) {
+      console.error("Gagal menghapus data:", err);
+    }
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilter((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const filteredSiswa = siswaList.filter((siswa) => {
+    const search = searchTerm.trim().toLowerCase();
+    const matchesSearch = siswa.nama?.toLowerCase().includes(search);
+    const matchesGender =
+  !filter.jenis_kelamin || siswa.jenis_kelamin === filter.jenis_kelamin;
+
+
+    return matchesSearch && matchesGender;
+  });
 
   return (
     <div className="siswa-container">
@@ -59,23 +79,25 @@ const handleDelete = async (id) => {
       {showModal && <ModalTambahSiswa onClose={handleTambahSelesai} />}
 
       <div className="filter-grid">
-        <div><label>Unit</label><select><option>Semua</option></select></div>
-        <div><label>Program Studi</label><select><option>Semua</option></select></div>
-        <div><label>Kelas</label><select><option>Semua</option></select></div>
-        <div><label>Status Mahasiswa</label><select><option>Semua</option></select></div>
-        <div><button className="btn-cari">Cari</button></div>
+        <div>
+          <select name="jenis_kelamin" value={filter.jenis_kelamin} onChange={handleFilterChange}>
+          <option value="">Semua</option>
+          <option value="Laki-laki">Laki-laki</option>
+          <option value="Perempuan">Perempuan</option>
+        </select>
+        </div>
       </div>
 
       <div className="search-box">
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search by nama..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
 
-      {siswaList.length === 0 ? (
+      {filteredSiswa.length === 0 ? (
         <div className="empty-message">Tidak ada data siswa</div>
       ) : (
         <div className="table-container">
@@ -94,9 +116,7 @@ const handleDelete = async (id) => {
               </tr>
             </thead>
             <tbody>
-              {(siswaList.filter((siswa) =>
-                siswa.nama.toLowerCase().includes(searchTerm.toLowerCase())
-              )).map((siswa) => (
+              {filteredSiswa.map((siswa) => (
                 <tr key={siswa.id}>
                   <td>{siswa.nama}</td>
                   <td>{siswa.tempat_lahir}</td>

@@ -1,0 +1,38 @@
+.kelulusan-wrapper {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.kelulusan-column {
+  flex: 1;
+  min-width: 400px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.kelulusan-column h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+
+.kelulusan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.kelulusan-header .btn-submit {
+  background-color: #3da75c;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}

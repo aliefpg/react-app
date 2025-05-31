@@ -21,7 +21,8 @@ const SekolahPage = () => {
 
   const fetchDataSekolah = async () => {
     try {
-      const res = await fetch("http://localhost:3001/api/sekolah");
+      const API = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${API}/api/sekolah`);
       if (!res.ok) throw new Error("Gagal fetch data sekolah");
       const data = await res.json();
       setSekolahList(data);
@@ -40,7 +41,8 @@ const SekolahPage = () => {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:3001/api/sekolah/${id}`, {
+      const API = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${API}/api/sekolah/${id}`, {
         method: "DELETE",
       });
       const data = await res.json();

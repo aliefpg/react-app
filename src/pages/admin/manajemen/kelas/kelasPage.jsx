@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "@/style/siswa.css";
 
-const ProgramStudiPage = () => {
+const KelasPage = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const API = import.meta.env.VITE_API_URL;
-    fetch(`${API}/api/program-studi`)
+    fetch(`${API}/api/kelas`)
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.error("Gagal ambil data:", err));
@@ -15,14 +15,13 @@ const ProgramStudiPage = () => {
   return (
     <div className="siswa-container">
       <div className="siswa-header">
-        <h1>Daftar Program Studi</h1>
+        <h1>Daftar kelas</h1>
       </div>
       <div className="table-wrapper">
         <table className="siswa-table">
           <thead>
             <tr>
-              <th>Nisn</th>
-              <th>Program Studi</th>
+              <th>Kelas</th>
             </tr>
           </thead>
           <tbody>
@@ -31,8 +30,7 @@ const ProgramStudiPage = () => {
             ) : (
               data.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.nisn}</td>
-                  <td>{item.program_studi}</td>
+                  <td>{item.kelas}</td>
                 </tr>
               ))
             )}
@@ -43,4 +41,4 @@ const ProgramStudiPage = () => {
   );
 };
 
-export default ProgramStudiPage;
+export default KelasPage;

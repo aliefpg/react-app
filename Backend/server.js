@@ -42,6 +42,17 @@ app.get("/api/program-studi", (req, res) => {
   });
 });
 
+app.get("/api/kelas", (req, res) => {
+  db.query(`
+    SELECT kelas
+    FROM data_sekolah
+    ORDER BY kelas ASC
+  `, (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json(result);
+  });
+});
+
 // DELETE siswa by ID
 app.delete("/api/siswa/:id", (req, res) => {
   const id = req.params.id;
@@ -114,6 +125,28 @@ app.delete("/api/sekolah/:id", (req, res) => {
   db.query("DELETE FROM data_sekolah WHERE id = ?", [req.params.id], (err) => {
     if (err) return res.status(500).send(err);
     res.send({ message: "Sekolah berhasil dihapus" });
+  });
+});
+
+
+// UBAH STATUS SISWA JADI LULUS
+app.post("/api/sekolah/luluskan", (req, res) => {
+  const { nisList } = req.body;
+
+  if (!Array.isArray(nisList) || nisList.length === 0) {
+    return res.status(400).json({ message: "Daftar NIS tidak valid atau kosong." });
+  }
+
+  const placeholders = nisList.map(() => "?").join(", ");
+  const sql = `UPDATE data_sekolah SET status = 'Lulus' WHERE nis IN (${placeholders})`;
+
+  db.query(sql, nisList, (err, result) => {
+    if (err) {
+      console.error("Gagal update status:", err);
+      return res.status(500).json({ message: "Gagal mengubah status siswa." });
+    }
+
+    res.json({ message: "Status siswa berhasil diubah ke 'Lulus'." });
   });
 });
 

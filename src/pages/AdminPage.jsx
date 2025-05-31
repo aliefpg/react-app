@@ -4,10 +4,12 @@ import AdminSidebar from "../components/AdminSidebar";
 
 // Placeholder component
 const EmptyPage = ({ title }) => <h1>{title}</h1>;
-import KelasPage from "./admin/manajemen/kelasPage";
+import KelasPage from "./admin/manajemen/kelas/kelasPage";
 import SiswaPage from "./admin/manajemen/siswa/siswaPage";
 import ProgramStudiPage from "./admin/manajemen/programstudi/ProgramStudiPage";
 import SekolahPage from "./admin/manajemen/sekolah/sekolahPage";
+import PengaturanPage from "./admin/setting/pengaturan";
+import KelulusanPage from "./admin/akademik/lulus/KelulusanPage";
 
 const AdminPage = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -25,11 +27,12 @@ const AdminPage = () => {
           <Route path="tagihan" element={<EmptyPage title="Kirim Tagihan" />} />
           <Route path="manajemen" element={<EmptyPage title="Manajemen Data" />} />
           <Route path="akademik" element={<EmptyPage title="Akademik" />} />
+          <Route path="akademik/lulus" element={<KelulusanPage />} />
           <Route path="setting-pembayaran" element={<EmptyPage title="Setting Pembayaran" />} />
           <Route path="kas-bank" element={<EmptyPage title="Kas Bank" />} />
           <Route path="laporan-pembayaran" element={<EmptyPage title="Laporan Pembayaran" />} />
           <Route path="laporan-keuangan" element={<EmptyPage title="Laporan Keuangan" />} />
-          <Route path="pengaturan" element={<EmptyPage title="Pengaturan" />} />
+          <Route path="setting/pengaturan" element={<PengaturanPage />} />
           <Route path="manajemen/kelas" element={<KelasPage />} />
           <Route path ="manajemen/siswa" element={<SiswaPage />} />
           <Route path="manajemen/program-studi" element={<ProgramStudiPage />} />

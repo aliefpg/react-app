@@ -1,0 +1,34 @@
+.pengaturan-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", sans-serif;
+}
+
+.pengaturan-container h1 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.pengaturan-container p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #555;
+}
+
+.btn-logout {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-logout:hover {
+  background-color: #c0392b;
+}
